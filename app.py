@@ -86,25 +86,25 @@ def book_checked_in():
     return "success"
 
 
-@app.route('/checkout_book_list_by_user', methods=["POST"])
+@app.route('/checkout_book_list_by_user', methods=["GET"])
 def checkout_book_list_by_user():
     """
     This method is used to fetch the checked out book records by the user
     :return: json object
     """
-    details = request.get_json(force=True)
+    details = request.args
     user_id = details["user_id"]
     result = lib_controller.get_checkout_book_list_of_user(user_id)
     return jsonify(result)
 
 
-@app.route('/checkout_book_list_on_library', methods=["POST"])
+@app.route('/checkout_book_list_on_library', methods=["GET"])
 def checkout_book_list_on_library():
     """
     This method is used to fetch the checked out book records on a library
     :return:
     """
-    details = request.get_json(force=True)
+    details = request.args
     library_id = details["library_id"]
     result = lib_controller.get_checkout_book_list_by_library(library_id)
     return jsonify(result)
